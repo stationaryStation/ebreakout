@@ -38,9 +38,9 @@ const Canvas = (
     };
 
     const bricks: BrickCoords[][] = [];
-    for (let c = 0; c < brickColumnCount; c++) {
+    for (let c = 0; c < brickColumnCount; c += 1) {
       bricks[c] = [];
-      for (let r = 0; r < brickRowCount; r++) {
+      for (let r = 0; r < brickRowCount; r += 1) {
         bricks[c][r] = { x: 0, y: 0, status: 1 };
       }
     }
@@ -66,8 +66,8 @@ const Canvas = (
     }
 
     function drawBricks() {
-      for (let c = 0; c < brickColumnCount; c++) {
-        for (let r = 0; r < brickRowCount; r++) {
+      for (let c = 0; c < brickColumnCount; c += 1) {
+        for (let r = 0; r < brickRowCount; r += 1) {
           if (bricks[c][r].status === 1) {
             const brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
             const brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
@@ -90,8 +90,8 @@ const Canvas = (
     }
 
     function collisionDetection() {
-      for (let c = 0; c < brickColumnCount; c++) {
-        for (let r = 0; r < brickRowCount; r++) {
+      for (let c = 0; c < brickColumnCount; c += 1) {
+        for (let r = 0; r < brickRowCount; r += 1) {
           const b = bricks[c][r];
           if (b.status === 1) {
             if (
@@ -102,7 +102,7 @@ const Canvas = (
             ) {
               dy = -dy;
               b.status = 0;
-              score++;
+              score += 1;
               if (score === brickRowCount * brickColumnCount) {
                 const WinMessage = 'YOU WIN, CONGRATULATIONS!';
                 alert(WinMessage);
@@ -152,15 +152,15 @@ const Canvas = (
       x += dx;
       y += dy;
     }
-    function keyDownHandler(e) {
-      if (e.key == 'Right' || e.key == 'ArrowRight') {
+    function keyDownHandler(e: { key: string }) {
+      if (e.key === 'Right' || e.key === 'ArrowRight') {
         rightPressed = true;
-      } else if (e.key == 'Left' || e.key == 'ArrowLeft') {
+      } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
         leftPressed = true;
       }
     }
 
-    function keyUpHandler(e) {
+    function keyUpHandler(e: { key: string }) {
       if (e.key === 'Right' || e.key === 'ArrowRight') {
         rightPressed = false;
       } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
